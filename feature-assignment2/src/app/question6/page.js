@@ -5,7 +5,7 @@ Render the current time in a <p> element.
 When the component unmounts, clear the interval to stop updating the time. */
 
 'use client'
-const { useState, useEffect } = require("react")
+import { useState, useEffect } from "react"; 
 
 const Clock = () => {
     let [time , setTime] = useState(new Date().toLocaleTimeString()); 
@@ -16,8 +16,6 @@ const Clock = () => {
         }, 1000);
         return () => clearInterval(Intervalid); 
     }, []); 
-
-
 
     return (
         <div>

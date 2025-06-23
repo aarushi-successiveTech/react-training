@@ -26,11 +26,19 @@ export default function Home() {
           <li><Link href="/question7">Question7</Link></li>
           <br/>
           <li><Link href="/question8">Question8</Link></li>
-         
+          <br/>
+          <li><Link href="/question9">Question9</Link></li>
+          <br/>
+          <li><Link href="/question10">Question10</Link></li>
+          <br/>
+          <li><Link href="/question11">Question11</Link></li>
+          <br/>
+          <li><Link href="/question12">Question12</Link></li>
+          <br/>
+          <li><Link href="/question13">Question13</Link></li>
         </ul>
       </nav>
     </div>
   );
 }
-
 

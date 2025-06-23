@@ -6,7 +6,7 @@ Add an input field where the user can specify a step value.
 Update the count using the specified step value when the buttons are clicked. */
 'use client'
 
-const { useState } = require("react")
+import { useState } from "react";
 
  
 

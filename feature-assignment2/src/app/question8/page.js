@@ -5,7 +5,7 @@ Include a time interval option to control the automatic slideshow progression. *
 
 'use client'
 
-const { useState } = require("react");
+import { useState } from "react";
 
 const slideshow = () => {
     const images = [
