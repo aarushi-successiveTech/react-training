@@ -36,6 +36,19 @@ export default function Home() {
           <li><Link href="/question12">Question12</Link></li>
           <br/>
           <li><Link href="/question13">Question13</Link></li>
+          <br/>
+          <li><Link href="/question14">Question14</Link></li>
+          <br/>
+          <li><Link href="/question15">Question15</Link></li>
+          <br/>
+          <li><Link href="/question16">Question16</Link></li>
+          <br/>
+          <li><Link href="/question17">Question17</Link></li>
+          <br/>
+          <li><Link href="/question18">Question18</Link></li>
+          <br/>
+          <li><Link href="/question19">Question19</Link></li>
+
         </ul>
       </nav>
     </div>
