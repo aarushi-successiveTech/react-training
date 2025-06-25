@@ -1,0 +1,58 @@
+import Image from "next/image";
+import styles from "./page.module.css";
+import Counter from "./question1/page";
+import Link from 'next/link';
+
+
+export default function Home() {
+  return (
+    <div>
+      <h1>Assignment - 2 Questions </h1>
+      <nav>
+        <ul>
+          <br/>
+          <li><Link href="/question1">Question1</Link></li>
+          <br/>
+          <li><Link href="/question2">Question2</Link></li>
+          <br/>
+          <li><Link href="/question3">Question3</Link></li>
+          <br/>
+          <li><Link href="/question4">Question4</Link></li>
+          <br/>
+          <li><Link href="/question5">Question5</Link></li>
+          <br/>
+          <li><Link href="/question6">Question6</Link></li>
+          <br/>
+          <li><Link href="/question7">Question7</Link></li>
+          <br/>
+          <li><Link href="/question8">Question8</Link></li>
+          <br/>
+          <li><Link href="/question9">Question9</Link></li>
+          <br/>
+          <li><Link href="/question10">Question10</Link></li>
+          <br/>
+          <li><Link href="/question11">Question11</Link></li>
+          <br/>
+          <li><Link href="/question12">Question12</Link></li>
+          <br/>
+          <li><Link href="/question13">Question13</Link></li>
+          <br/>
+          <li><Link href="/question14">Question14</Link></li>
+          <br/>
+          <li><Link href="/question15">Question15</Link></li>
+          <br/>
+          <li><Link href="/question16">Question16</Link></li>
+          <br/>
+          <li><Link href="/question17">Question17</Link></li>
+          <br/>
+          <li><Link href="/question18">Question18</Link></li>
+          <br/>
+          <li><Link href="/question19">Question19</Link></li>
+          
+
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
