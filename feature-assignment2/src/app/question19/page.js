@@ -3,72 +3,62 @@ Create a useTimer hook that takes a countdown duration as a parameter.
 Use setInterval to decrement the timer at regular intervals.
 Return the current timer value and methods to start, pause, and reset the timer.
 Develop a component that utilizes the useTimer hook to display and control a countdown.*/
+'use client'
+import { useState,useRef } from "react";
 
+const useTimer = (initialTime = 0) => {
 
-'use client';
-import { useState, useRef } from "react";
-
-const useTimer = (initialTime = 10) => {
     const [time, setTime] = useState(initialTime);
     const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef(null);
 
     const startTimer = () => {
-        if (intervalRef.current !== null) return; 
+        if (intervalRef.current !== null) return ; 
         setIsRunning(true);
+        
         intervalRef.current = setInterval(() => {
-            setTime((prevTime) => {
-                if (prevTime <= 1) {
-                    clearInterval(intervalRef.current);
-                    intervalRef.current = null;
-                    setIsRunning(false);
-                    return 0;
-                }
-                return prevTime - 1;
-            });
-        }, 1000);
+           setTime((prevTime) => {
+               if (prevTime <= 1) {
+                   clearInterval(intervalRef.current);
+                   intervalRef.current = null;
+                   setIsRunning(false);
+                   return 0;
+               }
+               return prevTime - 1;
+           });
+       }, 1000);
+
     };
 
     const pauseTimer = () => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-            setIsRunning(false);
-        }
+       if (intervalRef.current) {
+           clearInterval(intervalRef.current);
+           intervalRef.current = null;
+           setIsRunning(false);
+       }
+   };
+
+   const resetTimer = () => {
+       pauseTimer();
+       setTime(initialTime);
     };
 
-    const resetTimer = () => {
-        pauseTimer();
-        setTime(initialTime);
-    };
-
-    return { time, isRunning, startTimer, pauseTimer, resetTimer };
+    return {time, isRunning, startTimer, pauseTimer, resetTimer};
 };
 
-const CountdownTimer = () => {
-    const { time, startTimer, pauseTimer, resetTimer } = useTimer(10);
-
+const Countdown = () => {
+    const {time, startTimer, pauseTimer, resetTimer} = useTimer(10);
+    
     return (
-        <div style={{ padding: '20px' }}>
+        <div>
             <h2>Countdown Timer</h2>
             <h3>{time} seconds</h3>
 
-            <button onClick={startTimer} style={{ padding: '8px 12px', marginRight: '10px' }}>
-                Start
-            </button>
-
-            <button onClick={pauseTimer} style={{ padding: '8px 12px', marginRight: '10px' }}>
-                Pause
-            </button>
-
-            <button onClick={resetTimer} style={{ padding: '8px 12px' }}>
-                Reset
-            </button>
-
+            <button style ={{marginRight : "10px"}}onClick={startTimer}>start</button>
+            <button style ={{marginRight : "10px"}}onClick={pauseTimer}>Pause</button>
+            <button onClick={resetTimer}>Reset</button>
         </div>
-    );
+    )
 };
 
-export default function Page() {
-    return <CountdownTimer />;
-}
+export default Countdown; 
