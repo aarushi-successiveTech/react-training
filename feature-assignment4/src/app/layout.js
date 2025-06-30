@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+/* import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,6 +21,128 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+      </body>
+    </html>
+  );
+}
+*/
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import ArticleIcon from '@mui/icons-material/Article';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+
+const drawerWidth = 240;
+
+const navItems = [
+  { text: 'Home', href: '/', icon: <HomeIcon /> },
+  { text: 'About', href: '/about', icon: <InfoIcon /> },
+  { text: 'Contact', href: '/contact', icon: <ContactMailIcon /> },
+  {text : 'Form', href : '/userForm', icon : <ArticleIcon/>}
+];
+
+
+export default function RootLayout({ children }) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <div>
+      <Toolbar />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton component={Link} href={item.href} onClick={() => setMobileOpen(false)}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
+  return (
+    <html lang="en">
+      <body>
+        <Box sx={{ display: 'flex' }}>
+          <AppBar
+            position="fixed"
+            sx={{
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              ml: { sm: `${drawerWidth}px` },
+            }}
+          >
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: 'none' } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                Responsive Sidebar
+              </Typography>
+            </Toolbar>
+          </AppBar>
+
+          <Box
+            component="nav"
+            sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          >
+            <Drawer
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{ keepMounted: true }}
+              sx={{
+                display: { xs: 'block', sm: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', sm: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Box>
+
+          <Box
+            component="main"
+            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+          >
+            <Toolbar />
+            {children} 
+          </Box>
+        </Box>
       </body>
     </html>
   );

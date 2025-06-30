@@ -1,14 +1,14 @@
-
-
-import SearchFilter from "./question7/page";
-import TemperatureConverter from "./question8/page";
-
-
+import { Typography } from '@mui/material';
 
 export default function Home() {
   return (
-    <div>
-      <TemperatureConverter />
-    </div>
+    <>
+      <Typography variant="h4" gutterBottom>
+        Home Page
+      </Typography>
+      <Typography variant="body1">
+        This is the main content area. 
+      </Typography>
+    </>
   );
 }
