@@ -1,11 +1,14 @@
 
-import DataFetcher from "./question16/DataFetcher";
 
+import DataHandler from "./question16/FetchData";
 
 export default function Home() {
+
+  const userLogin = true;
   return(
     <div>
-      <DataFetcher/>
+
+      <DataHandler/>
     </div>
   )
 }
