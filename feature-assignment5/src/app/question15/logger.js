@@ -1,72 +1,40 @@
-"use client";
+'use client'
 
-import { useState, useEffect, useRef } from 'react';
-const withLogger = (WrappedComponent) => {
+const { useState, useEffect } = require("react")
 
-  return function WithLoggerComponent(props) {
-    const componentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-    const isMounted = useRef(false);
+const WithLogger = (WrappedComponent) =>{
+    return function checkLogs(props){
 
-   
-    useEffect(() => {
-      console.log(`%c[${componentName}] has MOUNTED.`, 'color: green; font-weight: bold;');
 
-   
-      return () => {
-        console.log(`%c[${componentName}] is UNMOUNTING.`, 'color: red; font-weight: bold;');
-      };
-    }, []); 
-    useEffect(() => {
-      if (isMounted.current) {
-        console.log(`%c[${componentName}] has UPDATED.`, 'color: blue; font-weight: bold;');
-        console.log('  New props received:', props);
-      } else {
+        useEffect(() => {
+            console.log(`${WrappedComponent.name} is mounted`);
 
-        isMounted.current = true;
-      }
-    }); 
-    return <WrappedComponent {...props} />;
-  };
+            return () =>{
+                console.log(`${WrappedComponent.name} is unmounted`)
+            };
+        }, []);
+
+        useEffect(()=>{
+            console.log(`${WrappedComponent.name} is updated`);
+        });
+
+        return <WrappedComponent {...props}/>
+    }
 };
 
+const Counter = () => {
+    const [count , setCount] = useState(0);
 
-export default function HocLoggerDemo() {
-  const [isVisible, setIsVisible] = useState(true);
-  const [message, setMessage] = useState('Hello World');
+    const increase = () =>{
+        setCount(count + 1);
+    }
 
-  return (
-    <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>HOC Logger Demo</h1>
+    return(
 
+        <button onClick={increase}>+</button>
+    );
 
-      <div style={{ marginTop: '1.5rem' }}>
-        <h3>Test Mount / Unmount</h3>
-        <label>
-          <input
-            type="checkbox"
-            checked={isVisible}
-            onChange={() => setIsVisible(v => !v)}
-          />
-          Show the logged component
-        </label>
-      </div>
-
-     
-      <div style={{ marginTop: '1.5rem' }}>
-        <h3>Test Update (Props)</h3>
-        <label htmlFor="messageInput">Change component's prop message:</label>
-        <br />
-        <input
-          id="messageInput"
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          style={{ marginTop: '0.5rem', padding: '0.25rem' }}
-        />
-      </div>
-
-      
-      
-    </main>
-  );
 }
+
+const CounterWithLogger = WithLogger(Counter);
+export default CounterWithLogger; 

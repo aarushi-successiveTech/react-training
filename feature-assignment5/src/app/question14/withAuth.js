@@ -1,53 +1,28 @@
-
-"use client";
-
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from './AuthProvider'; 
-
-
-const withAuth = (WrappedComponent) => {
-  return function AuthenticatedComponent(props) {
-    const { isAuthenticated } = useAuth();
-    const router = useRouter();
-
-    useEffect(() => {
-    
-      if (!isAuthenticated) {
-        router.push('/');
-      }
-    }, [isAuthenticated, router]);
-
-    
-    if (isAuthenticated) {
-      return <WrappedComponent {...props} />;
+const WithAuth = (WrappedComponent) => {
+    return function Authenticated(props){
+        const {isLoggedIn} = props; 
+        if (isLoggedIn){
+            return <WrappedComponent {...props}/>; 
+        }
+        return (
+            <div>
+            <h2>Please Log in</h2>
+            </div>
+        )
     }
-    
-    return <p>Redirecting to login...</p>;
-  };
-};
-
-
-function ProductsPage() {
-  const { logout } = useAuth();
-  const router = useRouter();
-
-  const handleLogout = () => {
-    logout();
-    router.push('/'); 
-  };
-
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Protected Products Page</h1>
-      <p>You can only see this page if you are logged in!</p>
-      <ul>
-        <li>Product A</li>
-        <li>Product B</li>
-      </ul>
-      <button onClick={handleLogout}>Log Out</button>
-    </div>
-  );
 }
 
-export default withAuth(ProductsPage);
+const Profile =() =>{
+    return(
+        <div>
+            <h2>Profile Page</h2>
+            <li>Product1</li>
+            <li>Product2</li>
+            <li>Product3</li>
+            <li>Product4</li>
+        </div>
+    );
+}
+
+const Result = WithAuth(Profile);
+export default Result; 
